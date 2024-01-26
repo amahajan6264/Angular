@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { StudentService } from '../student.service';
 import { Subject } from 'rxjs';
+import { FormControl } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
+import { Student } from '../student';
+import { FormsModule } from '@angular/forms';
 
 
 @Component({
@@ -9,56 +13,66 @@ import { Subject } from 'rxjs';
   styleUrls: ['./student-list.component.css']
 })
 export class StudentListComponent implements OnInit {
-  message:String=``;
-  ///dtOptions: DataTables.Settings = {};  
-  dtTrigger: Subject<any>= new Subject(); 
+  message: String = ``;
+  dtTrigger: Subject<any> = new Subject();
   public students: any[] = [];
-  deleteFlag:boolean=false;
-  constructor(private studentservice: StudentService) {}
+  deleteFlag: boolean = false;
+  constructor(private studentservice: StudentService) { }
+  isupdated: boolean = false;
+  student: Student = new Student();
 
   ngOnInit(): void {
-    // this.dtOptions = { 
-    //   pagingType: 'full_numbers', 
-    //   pageLength: 5,  
-    //   searching:true,
-    //   stateSave:true,  
-    //   lengthMenu:[[6, 16, 20, -1], [6, 16, 20, "All"]],  
-    //   processing: true  
-    // }; 
     this.studentservice.getStudentList().subscribe(data => {
-        this.students = data;
-        this.dtTrigger.next(this.students);
+      this.students = data;
+      //this.dtTrigger.next(this.students);
     });
 
   }
 
   trackById(index: number, students: any): any {
-    return students.id;   
+    return students.id;
   }
 
-  updateStudent(updstu:number){
-    
+  updateStudent(id: number) {
+    this.studentservice.getStudent(id)
+      .subscribe(
+        data => {
+          this.student = data
+          alert(JSON.stringify(this.student.studentAddress));
+          
+        });
+
   }
 
-  deleteStudent(delstu:number){
-    if(confirm("You want to delete the student")){
-      this.message=delstu+" : Student is deleted successfully";
-      this.studentservice.deleteStudent(delstu)  
-      .subscribe(  
-        data => {  
-          this.deleteFlag=true;  
-          this.studentservice.getStudentList().subscribe(data =>{  
-            this.students =data  
-            })  
-        }); 
-       
-      }else{
-        this.deleteFlag=true;
-        this.message=delstu+" : Student is deletion is canceled";
-      }
-      setTimeout(() => {
-        this.deleteFlag = false;
-      }, 3000);
+  updateStu(updstu: any) {
+
+  }
+  studentupdateform = new FormGroup({
+    student_id: new FormControl(),
+    student_name: new FormControl(),
+    student_email: new FormControl(),
+    student_branch: new FormControl()
+  });
+
+  deleteStudent(delstu: number) {
+    if (confirm("You want to delete the student")) {
+      this.message = delstu + " : Student is deleted successfully";
+      this.studentservice.deleteStudent(delstu)
+        .subscribe(
+          data => {
+            this.deleteFlag = true;
+            this.studentservice.getStudentList().subscribe(data => {
+              this.students = data
+            })
+          });
+
+    } else {
+      this.deleteFlag = true;
+      this.message = delstu + " : Student is deletion is canceled";
+    }
+    setTimeout(() => {
+      this.deleteFlag = false;
+    }, 3000);
   }
 
 

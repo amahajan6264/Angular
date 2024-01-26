@@ -28,9 +28,7 @@ export class SaveStudentComponent implements OnInit {
   });
 
 
-  progress1(){
-
-  }
+ 
 
   ngOnInit(): void { }
 

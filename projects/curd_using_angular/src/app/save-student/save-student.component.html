@@ -1,13 +1,13 @@
-<div class="container mt-5 ">
+<div class="container mt-1">
   <div class="row justify-content-center ">
       
-    <div *ngIf="submitted" class="text-center">
-      <span class="text-success">Student is save successfully with "{{dataSave.id}}" Id</span>
+    <div *ngIf="submitted" class="text-center mb-2" >
+      <span class="text-success ">Student is save successfully with "{{dataSave.id}}" Id</span>
     </div>
     
-    <div class="col-md-6 bg-success rounded-3">
+    <div class="col-md-5 bg-success rounded-3">
 
-      <h2>Student Registration</h2>
+      <h2 class="text-center"><i class="bi bi-person-plus-fill" style="font-size: 2rem;"></i>  Student Registration</h2>
       <form [formGroup]="frmSave" (ngSubmit)="saveStudent(frmSave.value)">
         <div class="form-group mt-3">
           <label for="name">Name</label>
@@ -46,7 +46,7 @@
           <button type="reset" class="btn btn-danger">Cancel</button>
         </div>
       </form>
-      <footer class="copyright mt-3">
+      <footer class="copyright mt-5">
         <p>&copy; 2023 Financial softwae system. All rights reserved.</p>
       </footer>
     </div>

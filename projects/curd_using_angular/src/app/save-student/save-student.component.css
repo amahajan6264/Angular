@@ -18,3 +18,7 @@ label{
 .text-center{
     size: 80px;
 }
+
+h2{
+    border: 10px black;
+}

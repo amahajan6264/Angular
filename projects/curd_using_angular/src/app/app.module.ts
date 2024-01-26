@@ -8,6 +8,7 @@ import { StudentListComponent } from './student-list/student-list.component';
 import { StudentHomeComponent } from './student-home/student-home.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { HttpClientModule } from '@angular/common/http';
     SaveStudentComponent,
     StudentListComponent,
     StudentHomeComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

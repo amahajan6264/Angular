@@ -2,3 +2,6 @@ img{
     height: 50px;
     text-align: left;
 }
+container-fluid{
+    background-color:aqua;
+}

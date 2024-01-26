@@ -16,11 +16,14 @@ export class StudentService {
     return this.http.get<any[]>(`${this.baseUrl}`+'students');  
   }  
 
-  saveStudent(student: Student) {
+  saveStudent(student: Student){
     return this.http.post(`${this.baseUrl}`+'students', student)  
   }
 
   deleteStudent(id: number): Observable<any> {  
     return this.http.delete(`${this.baseUrl}/student/${id}`, { responseType: 'text' });  
   }  
+  getStudent(id:number):Observable<any>{
+    return this.http.get(`${this.baseUrl}/students/${id}`);
+  }
 }
